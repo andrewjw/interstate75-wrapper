@@ -21,7 +21,7 @@ except ImportError:
     def cast(x, y):  # type:ignore
         return y
 
-from .graphics import Graphics
+from .screens import WritableScreen
 
 
 class FontData:
@@ -37,7 +37,7 @@ def __get_font(font: str) -> FontData:
     return cast(FontData, getattr(locals["i75"].fontdata, font))
 
 
-def render_text(buffer: Graphics,
+def render_text(buffer: WritableScreen,
                 font: str,
                 x: int,
                 y: int,
@@ -71,7 +71,7 @@ def render_text(buffer: Graphics,
         x += width + 1
 
 
-def render_text_multiline(buffer: Graphics,
+def render_text_multiline(buffer: WritableScreen,
                           font: str,
                           x: int,
                           y: int,

@@ -14,9 +14,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from .graphics import Graphics
-
-
 class Colour:
     """Manage colours from a 32-bit integer"""
     def __init__(self, value: int) -> None:
@@ -42,10 +39,6 @@ class Colour:
         """The alpha component - 0 to 255."""
         return self._value & 255
 
-    def set_colour(self, graphics: Graphics):
-        """Set the current colour used by i75 to this colour."""
-        graphics.set_pen(graphics.create_pen(self.r, self.g, self.b))
-
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, Colour):
             return False
@@ -65,3 +58,8 @@ class Colour:
     def fromrgb(r: int, g: int, b: int) -> "Colour":
         """Create a Colour object from three RGB values."""
         return Colour(r << 24 | g << 16 | b << 8 | 255)
+
+    @staticmethod
+    def fromrgba(r: int, g: int, b: int, a: int) -> "Colour":
+        """Create a Colour object from four RGBA values."""
+        return Colour(r << 24 | g << 16 | b << 8 | a)
