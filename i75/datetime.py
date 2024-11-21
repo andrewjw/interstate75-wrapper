@@ -85,6 +85,11 @@ class Date:
         self.__days_since_1970 -= days
         return self
 
+    def __sub__(self, other: "Date") -> "TimeDelta":
+        if not isinstance(other, Date):
+            raise TypeError("Expected Date type.")
+        return TimeDelta(self.__days_since_1970 - other.__days_since_1970)
+
     @property
     def year(self) -> int:
         return self.__year_month_day()[0]
@@ -124,6 +129,9 @@ class DateTime:
     def weekday(self) -> int:
         """Returns the day of the week. 0 is Monday, 6 is Sunday."""
         return self.__date.weekday()
+
+    def date(self) -> Date:
+        return self.__date
 
     @property
     def year(self) -> int:
